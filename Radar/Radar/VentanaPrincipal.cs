@@ -13,7 +13,7 @@ namespace Radar {
 		ControlRadar control = new ControlRadar();
 
         public VentanaPrincipal() {
-            InitializeComponent();
+			this.InitializeComponent();
         }
 
 		private void btnAgregar_Click(object sender, EventArgs e) {
@@ -26,18 +26,17 @@ namespace Radar {
 		}
 
 		private void btnBuscar_Click(object sender, EventArgs e) {
-			if(this.tbPatente.Text.Length == 0)
-				this.ListarTodos();
-			else {
+			if(this.tbPatente.Text.Length > 0) {
 				this.lsbInfracciones.Items.Clear();
-
-				Vehiculo vehiculo = control.BuscarPorPatente(this.tbPatente.Text);
+				Vehiculo vehiculo = control.BuscarPorPatenteBS(this.tbPatente.Text);
 
 				if(vehiculo != null) {
-					string linea = DarFormatoEnLista(vehiculo);
+					string linea = this.DarFormatoEnLista(vehiculo);
 					this.lsbInfracciones.Items.Add(linea);
 				}
 			}
+
+			this.tbPatente.Clear();
 		}
 
 		private void btnListar_Click(object sender, EventArgs e) {
@@ -48,7 +47,7 @@ namespace Radar {
 			this.lsbInfracciones.Items.Clear();
 			for(int i = 0; i < control.CantidadVehiculo; i++) {
 				Vehiculo v = control.VerVehiculosInfractores(i);
-				string linea = DarFormatoEnLista(v);
+				string linea = this.DarFormatoEnLista(v);
 				this.lsbInfracciones.Items.Add(linea);
 			}
 		}

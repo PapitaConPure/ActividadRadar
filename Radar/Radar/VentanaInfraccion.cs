@@ -11,15 +11,19 @@ using System.Windows.Forms;
 namespace Radar {
 	public partial class VentanaInfraccion: Form {
 		public VentanaInfraccion() {
-			InitializeComponent();
+			this.InitializeComponent();
 		}
 
 		private void tbPatente_TextChanged(object sender, EventArgs e) {
-			ComprobarActivar();
+			this.ComprobarActivar();
+		}
+
+		private void nudVelocidad_ValueChanged(object sender, EventArgs e) {
+			this.ComprobarActivar();
 		}
 
 		private void nudVelocidad_KeyUp(object sender, KeyEventArgs e) {
-			ComprobarActivar();
+			this.ComprobarActivar();
 		}
 
 		private void ComprobarActivar() {

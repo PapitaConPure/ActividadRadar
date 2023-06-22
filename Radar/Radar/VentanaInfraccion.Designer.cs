@@ -73,6 +73,12 @@ namespace Radar {
 			this.nudVelocidad.Name = "nudVelocidad";
 			this.nudVelocidad.Size = new System.Drawing.Size(67, 20);
 			this.nudVelocidad.TabIndex = 1;
+			this.nudVelocidad.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+			this.nudVelocidad.ValueChanged += new System.EventHandler(this.nudVelocidad_ValueChanged);
 			this.nudVelocidad.KeyUp += new System.Windows.Forms.KeyEventHandler(this.nudVelocidad_KeyUp);
 			// 
 			// tbPatente
@@ -154,7 +160,7 @@ namespace Radar {
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.btnCancelar;
-			this.ClientSize = new System.Drawing.Size(190, 209);
+			this.ClientSize = new System.Drawing.Size(198, 215);
 			this.ControlBox = false;
 			this.Controls.Add(this.btnCancelar);
 			this.Controls.Add(this.btnAceptar);
