@@ -13,7 +13,7 @@
 		public bool EsOficial { get; private set; }
 
 		public bool VerificarVelocidadInfractor() {
-			return true; //PENDIENTE
+			return this.Velocidad < 50 || this.Velocidad > 90;
 		}
 	}
 }

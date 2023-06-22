@@ -1,26 +1,35 @@
 ﻿namespace Radar {
 	class ControlRadar {
-		private Vehiculo[] infracciones;
+		private Vehiculo[] infracciones = new Vehiculo[100];
 
 		public int CantidadVehiculo { get; private set; }
 
-		public void AgregarControl(string patente, double velocidad) {
-			Vehiculo[] aux = new Vehiculo[infracciones.Length];
-			infracciones.CopyTo(aux, 0);
-			aux[infracciones.Length] = new Vehiculo(patente, velocidad, false);
-			infracciones = aux;
+		public Vehiculo AgregarControl(string patente, double velocidad, bool esOficial) {
+			Vehiculo nuevo = new Vehiculo(patente, velocidad, esOficial);
+			this.infracciones[this.CantidadVehiculo] = nuevo;
+			this.CantidadVehiculo++;
+			return nuevo;
 		}
 
 		public Vehiculo VerVehiculosInfractores(int idx) {
+			if(idx < 0 || idx > this.CantidadVehiculo)
+				return null;
+
 			return infracciones[idx];
 		}
 
 		public Vehiculo BuscarPorPatente(string patente) {
-			foreach(Vehiculo infraccion in infracciones)
-				if(infraccion.Patente == patente)
-					return infraccion;
+			int l = this.CantidadVehiculo;
+			Vehiculo v = null;
+			int i = 0;
 
-			return null;
+			while(i < l && v == null) {
+				if(this.infracciones[i].Patente == patente)
+					v = this.infracciones[i];
+				i++;
+			}
+
+			return v;
 		}
 	}
 }
