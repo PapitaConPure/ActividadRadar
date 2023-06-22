@@ -56,7 +56,7 @@
 			return v;
 		}
 
-		private void Ordenar() {
+		public void Ordenar() {
 			Vehiculo[] v = this.infracciones; //Referencia
 			Vehiculo aux;
 
