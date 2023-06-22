@@ -14,7 +14,8 @@ namespace Radar {
 
         public VentanaPrincipal() {
 			this.InitializeComponent();
-        }
+			this.AgregarValoresDePrueba();
+		}
 
 		private void btnAgregar_Click(object sender, EventArgs e) {
 			VentanaInfraccion f = new VentanaInfraccion();
@@ -30,7 +31,9 @@ namespace Radar {
 				this.lsbInfracciones.Items.Clear();
 				Vehiculo vehiculo = control.BuscarPorPatenteBS(this.tbPatente.Text);
 
-				if(vehiculo != null) {
+				if(vehiculo == null)
+					this.lsbInfracciones.Items.Add("Patente no encontrada");
+				else {
 					string linea = this.DarFormatoEnLista(vehiculo);
 					this.lsbInfracciones.Items.Add(linea);
 				}
@@ -56,11 +59,21 @@ namespace Radar {
 			string textoOficial;
 
 			if(vehiculo.EsOficial)
-				textoOficial = "Oficial";
+				textoOficial = "OFI";
 			else
-				textoOficial = "No Oficial";
+				textoOficial = "NOF";
 
 			return $"{vehiculo.Patente} ({textoOficial}) // {vehiculo.Velocidad}km/h";
+		}
+
+		private void AgregarValoresDePrueba() {
+			control.AgregarControl("EFX-019", 159.5, false);
+			control.AgregarControl("ABC-879", 24.30, false);
+			control.AgregarControl("HJK-312", 49.93, true );
+			control.AgregarControl("ALI-132", 30.00, false);
+			control.AgregarControl("POZ-558", 180.7, true );
+			control.AgregarControl("JCO-614", 44.50, false);
+			control.AgregarControl("ZTU-428", 93.78, false);
 		}
 	}
 }

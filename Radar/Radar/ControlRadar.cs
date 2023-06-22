@@ -7,10 +7,16 @@
 
 		public Vehiculo AgregarControl(string patente, double velocidad, bool esOficial) {
 			Vehiculo nuevo = new Vehiculo(patente, velocidad, esOficial);
-			this.infracciones[this.CantidadVehiculo] = nuevo;
-			this.CantidadVehiculo++;
-			this.ordenado = false;
-			return nuevo;
+
+			if(nuevo.VerificarVelocidadInfractor()) {
+				this.infracciones[this.CantidadVehiculo] = nuevo;
+				this.CantidadVehiculo++;
+				this.ordenado = false;
+
+				return nuevo;
+			}
+			
+			return null;
 		}
 
 		public Vehiculo VerVehiculosInfractores(int idx) {
@@ -57,16 +63,17 @@
 		}
 
 		public void Ordenar() {
+			int i, j, l = this.CantidadVehiculo;
 			Vehiculo[] v = this.infracciones; //Referencia
 			Vehiculo aux;
 
-			for(int i = 1; i < this.CantidadVehiculo; i++) {
-				for(int j = this.CantidadVehiculo; j >= i; j--) {
-					if(v[j - 1].Patente.CompareTo(v[i].Patente) > 0) {
+			for(i = 0; i < l - 1; i++) {
+				for(j = i + 1; j < l; j++) {
+					if(v[i].Patente.CompareTo(v[j].Patente) > 0) {
 						#region Intercambiar
 						aux = v[i];
-						v[i] = v[j - 1];
-						v[j - 1] = aux;
+						v[i] = v[j];
+						v[j] = aux;
 						#endregion
 					}
 				}
